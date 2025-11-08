@@ -90,7 +90,8 @@ var Paul_Pio = function (prop) {
         // 移除方法
         destroy: () => {
             that.initHidden();
-            localStorage.setItem("posterGirl", "0");
+            // 移除 localStorage 持久化，刷新页面后看板娘会自动显示
+            // localStorage.setItem("posterGirl", "0");
         }
     };
 
@@ -332,13 +333,16 @@ var Paul_Pio = function (prop) {
 
         elements.show.onclick = () => {
             current.body.classList.remove("hidden");
-            localStorage.setItem("posterGirl", "1");
+            // 移除 localStorage 持久化，刷新页面后看板娘会自动显示
+            // localStorage.setItem("posterGirl", "1");
 
             that.init();
         }
     }
 
-    localStorage.getItem("posterGirl") === "0" ? this.initHidden() : this.init();
+    // 移除 localStorage 检查，每次页面加载都显示看板娘
+    // localStorage.getItem("posterGirl") === "0" ? this.initHidden() : this.init();
+    this.init();
 };
 
 // 请保留版权说明
