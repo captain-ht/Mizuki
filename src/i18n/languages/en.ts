@@ -168,6 +168,13 @@ export const en: Translation = {
 	[Key.wallpaperFullscreen]: "Fullscreen Mode",
 	[Key.wallpaperNone]: "Hide Wallpaper",
 
+	// Font mode
+	[Key.fontZenMaruGothic]: "Zen Maru Gothic",
+	[Key.fontHanalei]: "Hanalei",
+	[Key.fontSourceHanSerif]: "Source Han Serif",
+	[Key.fontDroidSans]: "Droid Sans",
+	[Key.fontHuninn]: "Huninn",
+
 	// Skills Page
 	[Key.skills]: "Skills",
 	[Key.skillsSubtitle]: "My technical skills and expertise",

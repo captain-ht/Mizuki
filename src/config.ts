@@ -177,12 +177,10 @@ export const siteConfig: SiteConfig = {
 
 	// 字体配置
 	font: {
-		zenMaruGothic: {
-			enable: true, // 启用全局圆体适合日语和英语，对中文适配一般
-		},
-		hanalei: {
-			enable: false, // 启用 Hanalei 字体作为全局字体，适合中文去使用
-		},
+		// 默认字体模式
+		defaultMode: "zenMaruGothic", // 可选: "zenMaruGothic", "hanalei", "sourceHanSerif", "droidSans", "huninn"
+		// 是否允许用户切换字体
+		allowSwitch: true,
 	},
 	showLastModified: true, // 控制“上次编辑”卡片显示的开关
 };

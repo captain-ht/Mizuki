@@ -172,10 +172,11 @@ const transparentClass = shouldEnableTransparency
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
 
-<script is:inline define:vars={{navbarTransparentMode: siteConfig.banner?.navbar?.transparentMode || "semi", defaultWallpaperMode: siteConfig.wallpaperMode.defaultMode}}>
-	// 立即执行，在页面渲染前应用壁纸模式，避免闪烁
+<script is:inline define:vars={{navbarTransparentMode: siteConfig.banner?.navbar?.transparentMode || "semi", defaultWallpaperMode: siteConfig.wallpaperMode.defaultMode, defaultFontMode: siteConfig.font.defaultMode}}>
+	// 立即执行，在页面渲染前应用壁纸模式和字体模式，避免闪烁
 	(function() {
 		const wallpaperMode = localStorage.getItem('wallpaperMode') || defaultWallpaperMode;
+		const fontMode = localStorage.getItem('fontMode') || defaultFontMode;
 		const body = document.body;
 		
 		// 立即应用 body 类，确保首次渲染就是正确的状态
@@ -193,6 +194,16 @@ const transparentClass = shouldEnableTransparency
 				body.classList.add('no-banner-mode');
 				break;
 		}
+		
+		// 立即应用字体模式
+		body.classList.remove(
+			'font-zen-maru-gothic',
+			'font-hanalei',
+			'font-source-han-serif',
+			'font-droid-sans',
+			'font-huninn'
+		);
+		body.classList.add(`font-${fontMode}`);
 	})();
 	
 	// 根据壁纸模式动态设置 banner 和全屏壁纸的显示
@@ -281,9 +292,41 @@ const transparentClass = shouldEnableTransparency
 		applyWallpaperMode();
 	});
 	
+	// 监听字体模式变化，立即应用（不重载页面）
+	window.addEventListener('font-mode-change', function(event) {
+		const { mode } = event.detail;
+		const body = document.body;
+		if (!body) return;
+		
+		// 移除所有字体类
+		body.classList.remove(
+			'font-zen-maru-gothic',
+			'font-hanalei',
+			'font-source-han-serif',
+			'font-droid-sans',
+			'font-huninn'
+		);
+		
+		// 添加当前字体类
+		body.classList.add(`font-${mode}`);
+	});
+	
 	// 支持 Swup 页面过渡
 	document.addEventListener('swup:page:view', function() {
 		applyWallpaperMode();
+		// 重新应用字体模式
+		const fontMode = localStorage.getItem('fontMode') || defaultFontMode;
+		const body = document.body;
+		if (body) {
+			body.classList.remove(
+				'font-zen-maru-gothic',
+				'font-hanalei',
+				'font-source-han-serif',
+				'font-droid-sans',
+				'font-huninn'
+			);
+			body.classList.add(`font-${fontMode}`);
+		}
 	});
 </script>
 

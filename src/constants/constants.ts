@@ -22,3 +22,10 @@ export const UNCATEGORIZED = "uncategorized";
 export const WALLPAPER_BANNER = "banner";
 export const WALLPAPER_FULLSCREEN = "fullscreen";
 export const WALLPAPER_NONE = "none";
+
+// Font mode constants
+export const FONT_ZEN_MARU_GOTHIC = "zenMaruGothic";
+export const FONT_HANALEI = "hanalei";
+export const FONT_SOURCE_HAN_SERIF = "sourceHanSerif";
+export const FONT_DROID_SANS = "droidSans";
+export const FONT_HUNINN = "huninn";

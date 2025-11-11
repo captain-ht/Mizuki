@@ -230,6 +230,13 @@ enum I18nKey {
 	wallpaperBanner = "wallpaperBanner",
 	wallpaperFullscreen = "wallpaperFullscreen",
 	wallpaperNone = "wallpaperNone",
+
+	// Font mode
+	fontZenMaruGothic = "fontZenMaruGothic",
+	fontHanalei = "fontHanalei",
+	fontSourceHanSerif = "fontSourceHanSerif",
+	fontDroidSans = "fontDroidSans",
+	fontHuninn = "fontHuninn",
 }
 
 export default I18nKey;
