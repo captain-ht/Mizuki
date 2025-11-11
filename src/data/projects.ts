@@ -23,24 +23,24 @@ export const projectsData: Project[] = [
 		id: "mizuki-blog",
 		title: "Mizuki Blog Theme",
 		description:
-			"Modern blog theme developed based on the Astro framework, supporting multilingual, dark mode, and responsive design features.",
+			"基于 Astro 框架开发的现代博客主题，支持多语言、深色模式和响应式设计功能。",
 		image: "",
 		category: "web",
 		techStack: ["Astro", "TypeScript", "Tailwind CSS", "Svelte"],
 		status: "completed",
 		liveDemo: "https://blog.example.com",
-		sourceCode: "https://github.com/example/mizuki", // 更改为GitHub链接
+		sourceCode: "https://github.com/captain-ht/Mizuki", // 更改为GitHub链接
 		visitUrl: "https://blog.example.com", // 添加前往项目链接
 		startDate: "2024-01-01",
 		endDate: "2024-06-01",
 		featured: true,
-		tags: ["Blog", "Theme", "Open Source"],
+		tags: ["博客", "主题", "开源"],
 	},
 	{
 		id: "portfolio-website",
-		title: "Personal Portfolio",
+		title: "个人作品集",
 		description:
-			"Personal portfolio website showcasing project experience and technical skills.",
+			"展示项目经验和技术技能的个人作品集网站。",
 		image: "",
 		category: "web",
 		techStack: ["React", "Next.js", "TypeScript", "Framer Motion"],
@@ -51,25 +51,25 @@ export const projectsData: Project[] = [
 		startDate: "2023-09-01",
 		endDate: "2023-12-01",
 		featured: true,
-		tags: ["Portfolio", "React", "Animation"],
+		tags: ["作品集", "React", "动画"],
 	},
 	{
 		id: "task-manager-app",
-		title: "Task Manager App",
+		title: "任务管理应用",
 		description:
-			"Cross-platform task management application supporting team collaboration and project management.",
+			"支持团队协作和项目管理的跨平台任务管理应用。",
 		image: "",
 		category: "mobile",
 		techStack: ["React Native", "TypeScript", "Redux", "Firebase"],
 		status: "in-progress",
 		startDate: "2024-03-01",
-		tags: ["Mobile", "Productivity", "Team Collaboration"],
+		tags: ["移动应用", "生产力", "团队协作"],
 	},
 	{
 		id: "data-visualization-tool",
-		title: "Data Visualization Tool",
+		title: "数据可视化工具",
 		description:
-			"Data visualization tool supporting multiple chart types and interactive analysis.",
+			"支持多种图表类型和交互式分析的数据可视化工具。",
 		image: "",
 		category: "web",
 		techStack: ["Vue.js", "D3.js", "TypeScript", "Node.js"],
@@ -78,13 +78,13 @@ export const projectsData: Project[] = [
 		visitUrl: "https://dataviz.example.com", // 添加前往项目链接
 		startDate: "2023-06-01",
 		endDate: "2023-11-01",
-		tags: ["Data Visualization", "Analytics", "Charts"],
+		tags: ["数据可视化", "分析", "图表"],
 	},
 	{
 		id: "e-commerce-platform",
-		title: "E-commerce Platform",
+		title: "电商平台",
 		description:
-			"Full-stack e-commerce platform including user management, product management, and order processing features.",
+			"包含用户管理、产品管理和订单处理功能的全栈电商平台。",
 		image: "",
 		category: "web",
 		techStack: ["Next.js", "Node.js", "PostgreSQL", "Stripe"],

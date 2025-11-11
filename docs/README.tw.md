@@ -124,7 +124,7 @@
 
 1. **克隆儲存庫：**
    ```bash
-   git clone https://github.com/matsuzaka-yuki/mizuki.git
+   git clone https://github.com/captain-ht/Mizuki.git
    cd mizuki
    ```
 
