@@ -120,7 +120,7 @@
 
 1. **リポジトリをクローン：**
    ```bash
-   git clone https://github.com/matsuzaka-yuki/mizuki.git
+   git clone https://github.com/captain-ht/Mizuki.git
    cd mizuki
    ```
 

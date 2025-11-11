@@ -22,7 +22,8 @@ export interface Props {
   hideUpdateDate?: boolean;
   hideTagsForMobile?: boolean;
   isHome?: boolean;
-  className?: string;
+  class?: string;
+  className?: string; // 兼容性：同时支持 class 和 className
   slug?: string;
   showOnlyBasicMeta?: boolean; // 新增属性，控制是否只显示基本元数据
   words?: number; // 字数统计
@@ -38,16 +39,20 @@ const {
   hideUpdateDate,
   hideTagsForMobile,
   isHome,
-  className = "",
+  class: classProp,
+  className,
   slug,
   showOnlyBasicMeta = false, // 默认为false，保持原有行为
   words,
   minutes,
   showWordCount = false // 默认不显示字数统计
 } = Astro.props;
+
+// 优先使用 class，如果没有则使用 className（兼容性）
+const finalClassName = classProp || className || "";
 ---
 
-<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
+<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", finalClassName]}>
     <!-- publish date -->
     <div class="flex items-center">
         <div class="meta-icon">

@@ -1,59 +1,37 @@
 ---
-title: Encrypted Post
+title: 加密文章
 published: 2024-01-15
-description: This is an article for testing the page encryption feature
+description: 这是一篇用于测试页面加密功能的文章
 encrypted: true
 pinned: true
 password: "123456"
-tags: ["Test", "Encryption"]
-category: "Technology"
+tags: ["测试", "加密"]
+category: "技术"
 ---
 
-This blog template is built with [Astro](https://astro.build/). For the things that are not mentioned in this guide, you may find the answers in the [Astro Docs](https://docs.astro.build/).
+这是一篇加密文章示例。只有输入正确的密码才能查看内容。
 
-## Front-matter of Posts
+## 加密功能
+
+你可以通过在文章的前置元数据中设置 `encrypted: true` 和 `password` 字段来加密文章内容。
 
 ```yaml
 ---
-title: My First Blog Post
-published: 2023-09-09
-description: This is the first post of my new Astro blog.
-image: ./cover.jpg
-tags: [Foo, Bar]
-category: Front-end
-draft: false
+title: 加密文章
+encrypted: true
+password: "你的密码"
 ---
 ```
 
+## 使用方法
 
+1. 在文章的前置元数据中添加 `encrypted: true`
+2. 设置 `password` 字段为你的密码
+3. 访问文章时，系统会要求输入密码
+4. 只有输入正确密码的用户才能查看文章内容
 
+## 注意事项
 
-
-| Attribute     | Description                                                                                                                                                                                                 |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `title`       | The title of the post.                                                                                                                                                                                      |
-| `published`   | The date the post was published.                                                                                                                                                                            |
-| `pinned`      | Whether this post is pinned to the top of the post list.                                                                                                                                                   |
-| `description` | A short description of the post. Displayed on index page.                                                                                                                                                   |
-| `image`       | The cover image path of the post.<br/>1. Start with `http://` or `https://`: Use web image<br/>2. Start with `/`: For image in `public` dir<br/>3. With none of the prefixes: Relative to the markdown file |
-| `tags`        | The tags of the post.                                                                                                                                                                                       |
-| `category`    | The category of the post.                                                                                                                                                                                   |
-| `licenseName` | The license name for the post content.                                                                                                                                                                      |
-| `author`      | The author of the post.                                                                                                                                                                                     |
-| `sourceLink`  | The source link or reference for the post content.                                                                                                                                                          |
-| `draft`       | If this post is still a draft, which won't be displayed.                                                                                                                                                    |
-
-## Where to Place the Post Files
-
-
-
-Your post files should be placed in `src/content/posts/` directory. You can also create sub-directories to better organize your posts and assets.
-
-```
-src/content/posts/
-├── post-1.md
-└── post-2/
-    ├── cover.png
-    └── index.md
-```
-
+- 密码是明文存储的，请谨慎使用
+- 建议使用强密码保护敏感内容
+- 加密功能适用于需要限制访问的文章
