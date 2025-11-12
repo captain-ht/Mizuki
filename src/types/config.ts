@@ -1,4 +1,15 @@
-import type { DARK_MODE, LIGHT_MODE, WALLPAPER_BANNER, WALLPAPER_FULLSCREEN, WALLPAPER_NONE } from "../constants/constants";
+import type {
+	DARK_MODE,
+	FONT_DROID_SANS,
+	FONT_HANALEI,
+	FONT_HUNINN,
+	FONT_SOURCE_HAN_SERIF,
+	FONT_ZEN_MARU_GOTHIC,
+	LIGHT_MODE,
+	WALLPAPER_BANNER,
+	WALLPAPER_FULLSCREEN,
+	WALLPAPER_NONE,
+} from "../constants/constants";
 
 export type SiteConfig = {
 	title: string;
@@ -6,16 +17,16 @@ export type SiteConfig = {
 	keywords?: string[]; // 站点关键词，用于生成 <meta name="keywords">
 
 	lang:
-		| "en"
-		| "zh_CN"
-		| "zh_TW"
-		| "ja"
-		| "ko"
-		| "es"
-		| "th"
-		| "vi"
-		| "tr"
-		| "id";
+	| "en"
+	| "zh_CN"
+	| "zh_TW"
+	| "ja"
+	| "ko"
+	| "es"
+	| "th"
+	| "vi"
+	| "tr"
+	| "id";
 
 	themeColor: {
 		hue: number;
@@ -47,12 +58,13 @@ export type SiteConfig = {
 
 	// 添加字体配置
 	font: {
-		zenMaruGothic: {
-			enable: boolean; // 是否使用 ZenMaruGothic-Black 作为全局字体
-		};
-		hanalei: {
-			enable: boolean; // 是否使用 Hanalei 作为全局字体
-		};
+		defaultMode:
+		| "zenMaruGothic"
+		| "hanalei"
+		| "sourceHanSerif"
+		| "droidSans"
+		| "huninn"; // 默认字体模式
+		allowSwitch?: boolean; // 是否允许用户切换字体
 	};
 
 	// 添加bangumi配置
@@ -78,12 +90,12 @@ export type SiteConfig = {
 
 	banner: {
 		src:
-			| string
-			| string[]
-			| {
-					desktop?: string | string[];
-					mobile?: string | string[];
-			  }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
+		| string
+		| string[]
+		| {
+			desktop?: string | string[];
+			mobile?: string | string[];
+		}; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
 		position?: "top" | "center" | "bottom";
 		carousel?: {
 			enable: boolean; // 是否启用轮播
@@ -193,7 +205,17 @@ type TwikooConfig = {
 
 export type LIGHT_DARK_MODE = typeof LIGHT_MODE | typeof DARK_MODE;
 
-export type WALLPAPER_MODE = typeof WALLPAPER_BANNER | typeof WALLPAPER_FULLSCREEN | typeof WALLPAPER_NONE;
+export type WALLPAPER_MODE =
+	| typeof WALLPAPER_BANNER
+	| typeof WALLPAPER_FULLSCREEN
+	| typeof WALLPAPER_NONE;
+
+export type FONT_MODE =
+	| typeof FONT_ZEN_MARU_GOTHIC
+	| typeof FONT_HANALEI
+	| typeof FONT_SOURCE_HAN_SERIF
+	| typeof FONT_DROID_SANS
+	| typeof FONT_HUNINN;
 
 export type BlogPostData = {
 	body: string;
@@ -262,7 +284,7 @@ export type WidgetComponentConfig = {
 		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
 		collapseThreshold?: number; // 折叠阈值
 	};
-	customProps?: Record<string, any>; // 自定义属性，用于扩展组件功能
+	customProps?: Record<string, unknown>; // 自定义属性，用于扩展组件功能
 };
 
 export type SidebarLayoutConfig = {
@@ -317,12 +339,12 @@ export type SakuraConfig = {
 
 export type FullscreenWallpaperConfig = {
 	src:
-		| string
-		| string[]
-		| {
-				desktop?: string | string[];
-				mobile?: string | string[];
-		  }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
+	| string
+	| string[]
+	| {
+		desktop?: string | string[];
+		mobile?: string | string[];
+	}; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
 	position?: "top" | "center" | "bottom"; // 壁纸位置，等同于 object-position
 	carousel?: {
 		enable: boolean; // 是否启用轮播

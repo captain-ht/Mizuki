@@ -233,4 +233,11 @@ export const zh_CN: Translation = {
 	[Key.wallpaperBanner]: "横幅模式",
 	[Key.wallpaperFullscreen]: "全屏模式",
 	[Key.wallpaperNone]: "隐藏壁纸",
+
+	// 字体模式
+	[Key.fontZenMaruGothic]: "圆体 (Zen Maru Gothic)",
+	[Key.fontHanalei]: "装饰体 (Hanalei)",
+	[Key.fontSourceHanSerif]: "思源宋体",
+	[Key.fontDroidSans]: "Droid Sans",
+	[Key.fontHuninn]: "粉圓体",
 };

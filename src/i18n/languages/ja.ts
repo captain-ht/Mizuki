@@ -249,4 +249,11 @@ export const ja: Translation = {
 	[Key.wallpaperBanner]: "バナーモード",
 	[Key.wallpaperFullscreen]: "全画面モード",
 	[Key.wallpaperNone]: "壁紙を非表示",
+
+	// フォントモード
+	[Key.fontZenMaruGothic]: "圓體 (Zen Maru Gothic)",
+	[Key.fontHanalei]: "裝飾體 (Hanalei)",
+	[Key.fontSourceHanSerif]: "源ノ明朝",
+	[Key.fontDroidSans]: "Droid Sans",
+	[Key.fontHuninn]: "粉圓體",
 };

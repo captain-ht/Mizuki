@@ -238,4 +238,11 @@ export const zh_TW: Translation = {
 	[Key.wallpaperBanner]: "橫幅模式",
 	[Key.wallpaperFullscreen]: "全屏模式",
 	[Key.wallpaperNone]: "隱藏壁紙",
+
+	// 字體模式
+	[Key.fontZenMaruGothic]: "圓體 (Zen Maru Gothic)",
+	[Key.fontHanalei]: "裝飾體 (Hanalei)",
+	[Key.fontSourceHanSerif]: "思源宋體",
+	[Key.fontDroidSans]: "Droid Sans",
+	[Key.fontHuninn]: "粉圓體",
 };
