@@ -24,6 +24,14 @@ declare global {
 
 		mobileTOCInit?: () => void;
 		closeAnnouncement?: () => void;
+		resetAnnouncement?: () => void;
+		diagnoseAnnouncement?: () => {
+			isClosed: boolean;
+			widgetLayoutRegistered: boolean;
+			widgetLayoutFound: boolean;
+			sidebarFound: boolean;
+			topComponentsCount: number;
+		};
 	}
 }
 

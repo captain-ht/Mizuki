@@ -69,35 +69,145 @@ const style = Astro.props.style;
         }
     }
 
+    // 重置公告栏显示状态
+    function resetAnnouncement() {
+        // 清除 localStorage 中的关闭标记
+        localStorage.removeItem('announcementClosed');
+        // 找到公告栏元素并显示
+        const widgetLayout = document.querySelector('widget-layout[data-id="announcement"]') as HTMLElement | null;
+        if (widgetLayout) {
+            widgetLayout.style.display = '';
+            console.log('✅ 公告栏已重置并显示');
+        } else {
+            console.warn('⚠️ 未找到公告栏元素');
+        }
+    }
+
+    // 诊断函数：输出调试信息
+    function diagnoseAnnouncement() {
+        console.group('🔍 公告栏诊断信息');
+        
+        // 1. 检查 localStorage
+        const isClosed = localStorage.getItem('announcementClosed') === 'true';
+        console.log('1. localStorage 状态:', isClosed ? '❌ 已关闭' : '✅ 未关闭');
+        
+        // 2. 检查自定义元素
+        const widgetLayoutRegistered = customElements.get('widget-layout');
+        console.log('2. widget-layout 自定义元素:', widgetLayoutRegistered ? '✅ 已注册' : '❌ 未注册');
+        
+        // 3. 检查 DOM 元素
+        const widgetLayout = document.querySelector('widget-layout[data-id="announcement"]') as HTMLElement | null;
+        console.log('3. DOM 元素:', widgetLayout ? '✅ 找到' : '❌ 未找到');
+        
+        if (widgetLayout) {
+            console.log('   - 显示状态:', window.getComputedStyle(widgetLayout).display);
+            console.log('   - 可见性:', window.getComputedStyle(widgetLayout).visibility);
+            console.log('   - 元素:', widgetLayout);
+        }
+        
+        // 4. 检查侧边栏
+        const sidebar = document.getElementById('sidebar');
+        console.log('4. 侧边栏元素:', sidebar ? '✅ 找到' : '❌ 未找到');
+        if (sidebar) {
+            console.log('   - 显示状态:', window.getComputedStyle(sidebar).display);
+            console.log('   - 元素:', sidebar);
+        }
+        
+        // 5. 检查组件配置
+        const topComponents = Array.from(document.querySelectorAll('#sidebar > div:first-child > *'));
+        console.log('5. 侧边栏顶部组件数量:', topComponents.length);
+        topComponents.forEach((comp, idx) => {
+            console.log(`   - 组件 ${idx + 1}:`, comp.tagName, comp.getAttribute('data-id') || '无ID');
+        });
+        
+        console.groupEnd();
+        
+        // 返回诊断结果
+        return {
+            isClosed,
+            widgetLayoutRegistered: !!widgetLayoutRegistered,
+            widgetLayoutFound: !!widgetLayout,
+            sidebarFound: !!sidebar,
+            topComponentsCount: topComponents.length
+        };
+    }
+
     // 检查并应用公告栏关闭状态
     function checkAnnouncementState() {
+        // 等待自定义元素注册完成
+        if (!customElements.get('widget-layout')) {
+            // 如果自定义元素还未注册，延迟检查
+            setTimeout(checkAnnouncementState, 100);
+            return;
+        }
+
         const widgetLayout = document.querySelector('widget-layout[data-id="announcement"]') as HTMLElement | null;
-        if (widgetLayout && localStorage.getItem('announcementClosed') === 'true') {
-            widgetLayout.style.display = 'none';
+        if (widgetLayout) {
+            const isClosed = localStorage.getItem('announcementClosed') === 'true';
+            if (isClosed) {
+                widgetLayout.style.display = 'none';
+                console.log('📢 公告栏已根据 localStorage 隐藏');
+            } else {
+                // 确保如果 localStorage 中没有关闭标记，公告栏是显示的
+                widgetLayout.style.display = '';
+                console.log('📢 公告栏应该显示');
+            }
+        } else {
+            console.warn('⚠️ 未找到公告栏元素，执行诊断...');
+            diagnoseAnnouncement();
         }
     }
 
     // 页面加载时检查是否已关闭
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', checkAnnouncementState);
-    } else {
-        // DOM已经加载完成，立即检查
-        checkAnnouncementState();
+    function initAnnouncementCheck() {
+        // 等待 DOM 和自定义元素都准备好
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                // 延迟一点时间确保自定义元素已注册
+                setTimeout(checkAnnouncementState, 50);
+            });
+        } else {
+            // DOM已经加载完成，延迟检查确保自定义元素已注册
+            setTimeout(checkAnnouncementState, 50);
+        }
     }
 
+    // 初始化检查
+    initAnnouncementCheck();
+
     // 支持 Swup 页面过渡
-    document.addEventListener('swup:page:view', checkAnnouncementState);
-    document.addEventListener('swup:content:replace', checkAnnouncementState);
+    document.addEventListener('swup:page:view', () => {
+        setTimeout(checkAnnouncementState, 100);
+    });
+    document.addEventListener('swup:content:replace', () => {
+        setTimeout(checkAnnouncementState, 100);
+    });
     
     // 如果 Swup 尚未初始化，监听启用事件
     document.addEventListener('swup:enable', function() {
         const swup = (window as Window & { swup?: { hooks?: { on: (event: string, callback: () => void) => void } } }).swup;
         if (swup && swup.hooks) {
-            swup.hooks.on('page:view', checkAnnouncementState);
-            swup.hooks.on('content:replace', checkAnnouncementState);
+            swup.hooks.on('page:view', () => {
+                setTimeout(checkAnnouncementState, 100);
+            });
+            swup.hooks.on('content:replace', () => {
+                setTimeout(checkAnnouncementState, 100);
+            });
         }
     });
 
     // 使公告栏函数全局可用
     (window as Window & { closeAnnouncement?: () => void }).closeAnnouncement = closeAnnouncement;
+    
+    // 将诊断函数暴露到全局，方便在控制台调用
+    (window as Window & { diagnoseAnnouncement?: () => void }).diagnoseAnnouncement = diagnoseAnnouncement;
+    
+    // 将重置函数暴露到全局，方便在控制台调用
+    (window as Window & { resetAnnouncement?: () => void }).resetAnnouncement = resetAnnouncement;
+    
+    // 页面加载完成后自动执行一次诊断
+    setTimeout(() => {
+        console.log('📢 公告栏组件已加载，执行诊断...');
+        diagnoseAnnouncement();
+    }, 1000);
 </script>
